@@ -1,0 +1,191 @@
+/* Lógico_2: */
+
+CREATE TABLE User (
+    ID_User number(6) PRIMARY KEY,
+    Name_User CHAR(15),
+    E_mail number(20),
+    Subscription_Date number(6),
+    Viewing_History_User CHAR(20)
+);
+
+CREATE TABLE Content (
+    ID_Content number(6) PRIMARY KEY,
+    Title_Content CHAR(15),
+    Estilo_Musica CHAR(15),
+    Tempo_da_Musica CHAR(15),
+    ID_Musica number(6)
+);
+
+CREATE TABLE Musica (
+    ID_Musica CHAR(15) PRIMARY KEY,
+    ID_Artista number(6),
+    Estilo_Musica CHAR(15),
+    Tempo_da_Musica number(10)
+);
+
+CREATE TABLE Playlist (
+    ID_Playlist CHAR(15) PRIMARY KEY,
+    Nome_Playlist CHAR(15),
+    QTD_De_Musicas number(1000),
+    ID_Musica number(6)
+);
+
+CREATE TABLE Artista (
+    ID_Artista CHAR(15) PRIMARY KEY,
+    Nome CHAR(15),
+    Idade number(6),
+    Data number(6),
+    Genero CHAR(15)
+);
+
+CREATE TABLE Album (
+    ID_Album number(6) PRIMARY KEY,
+    Artista CHAR(15),
+    QTD_Musicas CHAR(15),
+    ID_Musica number(6),
+    Estilo_Musica CHAR(15),
+    Data CHAR(15)
+);
+
+CREATE TABLE Qualidade (
+    ID_qualidade CHAR(6) PRIMARY KEY,
+    720 CHAR(6),
+    Full_HD CHAR(¨6)
+);
+
+CREATE TABLE Genero (
+    ID_Genero CHAR(15) PRIMARY KEY,
+    Estilo_De_Musica CHAR(15),
+    Nome_Musica CHAR(15)
+);
+
+CREATE TABLE Usuario_Pode (
+    fk_Playlist_ID_Playlist CHAR(15),
+    fk_Content_ID_Content number(6)
+);
+
+CREATE TABLE User_Escolher (
+    fk_Musica_ID_Musica CHAR(15),
+    fk_ID_Qualidade CHAR(6)
+);
+
+CREATE TABLE De_Um_Artista (
+    fk_Playlist_ID_Playlist CHAR(15) PRIMARY KEY
+);
+
+CREATE TABLE De_Artistas_Mistos (
+    fk_Playlist_ID_Playlist CHAR(15) PRIMARY KEY
+);
+
+CREATE TABLE Procura (
+    fk_User_ID_User number(6),
+    fk_Content_ID_Content number(6)
+);
+
+CREATE TABLE Tem (
+    fk_Content_ID_Content number(6),
+    fk_Musica_ID_Musica CHAR(15)
+);
+
+CREATE TABLE tem (
+    fk_Musica_ID_Musica CHAR(15),
+    fk_Artista_ID_Artista CHAR(15)
+);
+
+CREATE TABLE Tem (
+    fk_Artista_ID_Artista CHAR(15),
+    fk_Album_ID_Album number(6)
+);
+
+CREATE TABLE Tem (
+    fk_Artista_ID_Artista CHAR(15),
+    fk_Genero_ID_Genero CHAR(15)
+);
+ 
+ALTER TABLE Content ADD CONSTRAINT FK_Content_2
+    FOREIGN KEY (ID_Musica???)
+    REFERENCES ??? (???);
+ 
+ALTER TABLE Playlist ADD CONSTRAINT FK_Playlist_2
+    FOREIGN KEY (ID_Musica???)
+    REFERENCES ??? (???);
+ 
+ALTER TABLE Album ADD CONSTRAINT FK_Album_2
+    FOREIGN KEY (ID_Musica???)
+    REFERENCES ??? (???);
+ 
+ALTER TABLE Usuario_Pode ADD CONSTRAINT FK_Usuario_Pode_1
+    FOREIGN KEY (fk_Playlist_ID_Playlist)
+    REFERENCES Playlist (ID_Playlist);
+ 
+ALTER TABLE Usuario_Pode ADD CONSTRAINT FK_Usuario_Pode_2
+    FOREIGN KEY (fk_Content_ID_Content)
+    REFERENCES Content (ID_Content);
+ 
+ALTER TABLE User_Escolher ADD CONSTRAINT FK_User_Escolher_1
+    FOREIGN KEY (fk_Musica_ID_Musica)
+    REFERENCES Musica (ID_Musica);
+ 
+ALTER TABLE User_Escolher ADD CONSTRAINT FK_User_Escolher_2
+    FOREIGN KEY (fk_ID_Qualidade)
+    REFERENCES Qualidade (ID_qualidade);
+ 
+ALTER TABLE De_Um_Artista ADD CONSTRAINT FK_De_Um_Artista_2
+    FOREIGN KEY (fk_Playlist_ID_Playlist)
+    REFERENCES Playlist (ID_Playlist)
+    ON DELETE CASCADE;
+ 
+ALTER TABLE De_Artistas_Mistos ADD CONSTRAINT FK_De_Artistas_Mistos_2
+    FOREIGN KEY (fk_Playlist_ID_Playlist)
+    REFERENCES Playlist (ID_Playlist)
+    ON DELETE CASCADE;
+ 
+ALTER TABLE Procura ADD CONSTRAINT FK_Procura_1
+    FOREIGN KEY (fk_User_ID_User)
+    REFERENCES User (ID_User)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Procura ADD CONSTRAINT FK_Procura_2
+    FOREIGN KEY (fk_Content_ID_Content)
+    REFERENCES Content (ID_Content)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Tem ADD CONSTRAINT FK_Tem_1
+    FOREIGN KEY (fk_Content_ID_Content)
+    REFERENCES Content (ID_Content)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Tem ADD CONSTRAINT FK_Tem_2
+    FOREIGN KEY (fk_Musica_ID_Musica)
+    REFERENCES Musica (ID_Musica)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE tem ADD CONSTRAINT FK_tem_1
+    FOREIGN KEY (fk_Musica_ID_Musica)
+    REFERENCES Musica (ID_Musica)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE tem ADD CONSTRAINT FK_tem_2
+    FOREIGN KEY (fk_Artista_ID_Artista)
+    REFERENCES Artista (ID_Artista)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Tem ADD CONSTRAINT FK_Tem_1
+    FOREIGN KEY (fk_Artista_ID_Artista)
+    REFERENCES Artista (ID_Artista)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Tem ADD CONSTRAINT FK_Tem_2
+    FOREIGN KEY (fk_Album_ID_Album)
+    REFERENCES Album (ID_Album)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Tem ADD CONSTRAINT FK_Tem_1
+    FOREIGN KEY (fk_Artista_ID_Artista)
+    REFERENCES Artista (ID_Artista)
+    ON DELETE RESTRICT;
+ 
+ALTER TABLE Tem ADD CONSTRAINT FK_Tem_2
+    FOREIGN KEY (fk_Genero_ID_Genero)
+    REFERENCES Genero (ID_Genero)
+    ON DELETE RESTRICT;
